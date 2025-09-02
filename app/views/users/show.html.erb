@@ -7,6 +7,12 @@
         <%= @user.name %>
       </h1>
     </section>
+    <% if @user.introduction.present? %>
+      <section class="introduction">
+        <h4>Introduction</h4>
+        <p><%= @user.introduction %></p>
+      </section>
+    <% end %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
@@ -22,3 +28,4 @@
     <% end %>
   </div>
 </div>
+
