@@ -10,4 +10,12 @@
     | <%= link_to "delete", user, data: { "turbo-method": :delete,
                                           turbo_confirm: "You sure?" } %>
   <% end %>
+  <br>
+
+  <class = "stats">
+    
+    <strong>Following:</strong> <%= user.following.count %> |
+    <strong>Followers:</strong> <%= user.followers.count %>
+  
+  
 </li>
