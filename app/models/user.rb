@@ -120,4 +120,17 @@ class User < ApplicationRecord
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
     end
+
+    #pinned post methods
+    def pinned_micropost
+      micropost.find_by(pinned: true)
+    end
+
+    def has_pinned_post?
+      microposts.exists?(pinned: true)
+    end
+
+    def microposts_ordered_with_pinned
+      micropost.ordered_with_pinned
+    end
 end
