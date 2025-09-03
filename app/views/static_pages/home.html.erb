@@ -12,12 +12,12 @@
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
+      <h3><%= t('post.feed') %></h3>
 
       <!-- show pinned post first if it exists -->
       <% if @pinned_micropost %>
         <div class="pinned-post-container mb-4">
-          <h5 class="text-muted mb-2">📌 Pinned Post</h5>
+          <h5 class="text-muted mb-2">📌 <%= t('post.pinned_post') %></h5>
           <ol class="microposts list-unstyled">
             <%= render @pinned_micropost %>
           </ol>

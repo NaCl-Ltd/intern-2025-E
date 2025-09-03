@@ -3,7 +3,7 @@
   <%= link_to user.name, user %>
   
   <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, data: { "turbo-method": :delete,
+    | <%= link_to t('post.delete'), user, data: { "turbo-method": :delete,
                                           turbo_confirm: "You sure?" } %>
   <% end %>
   <% if user.introduction.present? %>
@@ -13,8 +13,8 @@
 
   <br>
   <class="stats">
-    <strong><%= user.following.count %></strong> following |
-    <strong><%= user.followers.count %></strong> followers
+    <strong><%= user.following.count %></strong> <%= t('users.following') %> |
+    <strong><%= user.followers.count %></strong> <%= t('users.followers') %>
   
 
 </li>

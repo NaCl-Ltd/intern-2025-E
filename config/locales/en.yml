@@ -29,9 +29,67 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
 
 en:
-  links:
+
+  header:
+    title: "SAMPLE APP"
+    home: "Home"
+    help: "Help"
     latest: "Latest"
+    users: "Users"
+    account: "Acount"
+    profile: "Profile"
+    setting: "Setting"
+    logout: "Logout"
+
+  help:
+    title: "Help"  
+    text1: "Get help on the Ruby on Rails Tutorial at the"
+    text2: "Rails Tutorial Help page"
+    text3: "To get help with this sample app, please refer to the" 
+    text4: "Ruby on Rails Tutorial book"
+    text5: "."
+
+  users:
+    title: "All users"
+    following : "Following"
+    followers : "Followers"
+    introduction: "Introduction"
+    microposts: "Microposts"
+    profile: "View my profile"
+
+  post:
+    delete: "Delete"
+    pin: "Pin"
+    unpin: "Unpin"
+    pinned_post: "Pinned post"
+    feed: Micropost Feed
+    post: "Post"
+    compose : "Compose new micropost..."
+
+  set:
+    title: "Update your profile"
+    name: "Name"
+    email: "Email"
+    password: "Password"
+    confirmation: "Confirmation"
+    introduction: "Introduction"
+    save: "Save changes"
+    change: change
+
+  text:
+    create_post: "Micropost created!"
+    update_post: "Micropost updated"
+    delete_post: "Micropost deleted"
+    pin_post: "Micropost pinned"
+    unpin_post: "Micropost unpinned"
+    profile_updated: "Profile updated"
+    welcome: "Welcome to the Sample App!"
+
+  home:
+    title: "Welcome to the Sample App"
+    text1: "This is the home page for the"
+    text2: "Ruby on Rails Tutorial"
+    text3: "sample application."
+    signup: "Sign up now!"

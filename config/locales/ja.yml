@@ -1,0 +1,64 @@
+
+ja:
+
+  header:
+    title: "サンプルアプリ"
+    home: "ホーム"
+    help: "ヘルプ"
+    latest: "最新"
+    users: "ユーザー一覧"
+    account: "アカウント"
+    profile: "プロフィール"
+    setting: "設定"
+    logout: "ログアウト"
+
+  help:
+    title: "ヘルプ" 
+    text1: "Ruby on Rails チュートリアルのヘルプは"
+    text2: "Rails チュートリアル ヘルプページ"
+    text3: "このサンプルアプリのヘルプを得るには" 
+    text4: "Ruby on Railsチュートリアル本"
+    text5: "をご覧ください。"
+
+  users:
+    title: "ユーザー一覧"
+    following : "フォロー中"
+    followers : "フォロワー"
+    introduction: "自己紹介"
+    microposts: "マイクロポスト"
+    profile: "プロフィールを見る"
+
+  post:
+    delete: "削除"
+    pin: "ピン留め"
+    unpin: "ピン留め解除"
+    pinned_post: "ピン留めされた投稿"
+    feed: "マイクロポストフィード"
+    post: "投稿"
+    compose: "新しいマイクロポストを作成..."
+
+  set:
+    title: "プロフィールを更新"
+    name: "名前"
+    email: "メールアドレス"
+    password: "パスワード"
+    confirmation: "確認"
+    introduction: "自己紹介"
+    save: "保存"
+    change: "変更"
+
+  text:
+    create_post: "マイクロポストを作成しました！"
+    update_post: "マイクロポストを更新しました"
+    delete_post: "マイクロポストを削除しました"
+    pin_post: "マイクロポストをピン留めしました"
+    unpin_post: "マイクロポストのピン留めを解除しました"
+    profile_updated: "プロフィールを更新しました"
+
+  home:
+    title: "サンプルアプリへようこそ！"
+    text: "このアプリは、"
+    text2: "Ruby on Rails チュートリアル"
+    text3: "のサンプルアプリです。"
+    signup: "サインアップ"
+

@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = t('text.profile_updated')
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity
@@ -54,14 +54,14 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = "Following"
+    @title = t('users.following')
     @user  = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow', status: :unprocessable_entity
   end
 
   def followers
-    @title = "Followers"
+    @title = t('users.followers')
     @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow', status: :unprocessable_entity

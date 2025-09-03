@@ -6,7 +6,7 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = t('text.create_post')
       redirect_to root_url
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
@@ -20,7 +20,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:success] = t('text.delete_post')
     if request.referrer.nil?
       redirect_to root_url, status: :see_other
     else
@@ -31,7 +31,7 @@ class MicropostsController < ApplicationController
   def pin
     begin
       @micropost.pin!
-      flash[:success] = "Micropost pinned!"
+      flash[:success] = t('text.pin_post')
       redirect_back(fallback_location: root_url)
     rescue ActiveRecord::RecordInvalid => e
       flash[:danger] = "Error pinning micropost: #{e.message}"
@@ -41,7 +41,7 @@ class MicropostsController < ApplicationController
 
   def unpin
     @micropost.unpin!
-    flash[:success] = "Micropost unpinned!"
+    flash[:success] = t('text.unpin_post')
     redirect_back(fallback_location: root_url)
   end 
 

@@ -9,7 +9,7 @@
     </section>
     <% if @user.introduction.present? %>
       <section class="Introduction">
-        <h4>Introduction</h4>
+        <h4><%= t('users.introduction') %></h4>
         <p><%= @user.introduction %></p>
       </section>
     <% end %>
@@ -22,7 +22,7 @@
     <!-- Show pinned post first if it exists -->
     <% if @pinned_micropost %>
       <div class="pinned-post-container mb-4">
-        <h5 class="text-muted mb-2">📌 Pinned Post</h5>
+        <h5 class="text-muted mb-2">📌 <%= t('post.pinned_post') %></h5>
         <ol class="microposts list-unstyled">
           <%= render @pinned_micropost %>
         </ol>
@@ -32,7 +32,7 @@
     
     <!-- Show regular posts -->
     <% if @microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <h3><%= t('users.microposts') %> (<%= @user.microposts.count %>)</h3>
       <ol class="microposts list-unstyled">
         <%= render @microposts %>
       </ol>
