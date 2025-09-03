@@ -13,8 +13,29 @@
     </aside>
     <div class="col-md-8">
       <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
+
+      <!-- show pinned post first if it exists -->
+      <% if @pinned_micropost %>
+        <div class="pinned-post-container mb-4">
+          <h5 class="text-muted mb-2">📌 Pinned Post</h5>
+          <ol class="microposts list-unstyled">
+            <%= render @pinned_micropost %>
+          </ol>
+        </div>
+        <hr>
+      <% end %>
+
+      <!-- show regular feed -->
+      <% if @feed_items.any? %>
+        <ol class="microposts list-unstyled">
+          <%= render @feed_items %>
+        </ol>
+        <%= will_paginate @feed_items %>
+      <% else %>
+        <p>No posts to show. Start following some users!</p>
+      <% end %>
     </div>
+
   </div>
 <% else %>
   <div class="center jumbotron">
