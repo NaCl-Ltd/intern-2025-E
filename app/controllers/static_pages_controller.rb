@@ -18,6 +18,13 @@ class StaticPagesController < ApplicationController
                             .order(created_at: :desc)
                             .paginate(page: params[:page])
       
+      @daily_prompt = Prompt.daily_prompt
+      @current_language = current_user.preferred_language
+
+      #mark daily prompt as seen if user hasn't seen it
+      unless current_user.has_seen_prompt?(@daily_prompt)
+        current_user.mark_prompt_as_seen(@daily_prompt)
+      end
 
     end
   end

@@ -1,0 +1,2 @@
+module DailyPromptsHelper
+end

@@ -10,11 +10,13 @@
       <section class="micropost_form">
         <%= render 'shared/micropost_form' %>
       </section>
+      <%= render 'daily_prompts/show' if logged_in? %>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
 
-      <!-- show pinned post first if it exists -->
+      <h3>Micropost Feed</h3>
+      
+        <!-- show pinned post first if it exists -->
       <% if @pinned_micropost %>
         <div class="pinned-post-container mb-4">
           <h5 class="text-muted mb-2">📌 Pinned Post</h5>

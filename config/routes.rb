@@ -9,24 +9,38 @@ Rails.application.routes.draw do
   get    "/login",   to: "sessions#new"
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
+  
   resources :users do
     member do
       get :following, :followers
     end
   end
+  
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]do
+  
+  resources :microposts,          only: [:create, :destroy] do
     collection do
       get :latest
     end
   end
+
   resources :relationships,       only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
+  
   resources :microposts, only: [:create, :destroy] do 
     member do
       patch :pin       # POST /microposts/1/pin
       patch :unpin     # POST /microposts/1/unpin
     end
+  end
+
+  get 'daily_prompts', to: 'daily_prompts#index'
+  resources :daily_prompts do
+    collection do
+      patch :refresh
+      patch :update_language
+      #put :update_language 
+    end 
   end
 end

@@ -1,0 +1,227 @@
+<div id="daily-prompt-section" class="mb-4 p-4 bg-light rounded">
+  <h4 class="mb-3">Daily Prompt / 日替わりお題</h4>
+  
+  <% if @daily_prompt %>
+    <div id="prompt-content" class="mb-3">
+      <p id="prompt-text" class="lead"><%= @daily_prompt.text_for_locale(@current_language) %></p>
+    </div>
+    
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <button id="refresh-prompt" class="btn btn-outline-primary btn-sm">
+          <i class="fas fa-sync-alt"></i> New Question
+        </button>
+      </div>
+      
+      <div class="language-toggle">
+        <button class="btn btn-outline-secondary btn-sm language-btn <%= 'active' if @current_language == 'en' %>" 
+                data-language="en">EN</button>
+        <button class="btn btn-outline-secondary btn-sm language-btn <%= 'active' if @current_language == 'ja' %>" 
+                data-language="ja">JP</button>
+      </div>
+    </div>
+    
+    <!-- Debug info (remove in production) -->
+    <div id="debug-info" class="mt-2 text-muted small">
+      <p>Current Language: <span id="current-lang"><%= @current_language %></span></p>
+      <p>User seen prompts: <%= current_user.viewed_prompts.count %></p>
+      <p>Available Routes (check rails routes):</p>
+      <ul>
+        <li>Refresh URL: <code id="refresh-url">Will be logged to console</code></li>
+        <li>Language URL: <code id="language-url">Will be logged to console</code></li>
+      </ul>
+    </div>
+  <% else %>
+    <p class="text-muted">No prompts available. Please add some prompts to the database.</p>
+  <% end %>
+</div>
+
+<script>
+$(document).ready(function() {
+  console.log('=== DAILY PROMPT DEBUG START ===');
+  console.log('jQuery version:', $.fn.jquery);
+  console.log('Current page URL:', window.location.href);
+  
+  // Test if elements exist
+  console.log('Refresh button exists:', $('#refresh-prompt').length > 0);
+  console.log('Language buttons exist:', $('.language-btn').length);
+  console.log('Prompt text element exists:', $('#prompt-text').length > 0);
+  
+  // Get CSRF token for AJAX requests
+  const token = $('meta[name="csrf-token"]').attr('content');
+  console.log('CSRF token found:', !!token);
+  
+  if (!token) {
+    console.error('CSRF token not found! Make sure you have <%= csrf_meta_tags %> in your layout');
+  }
+  
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', token);
+    }
+  });
+  
+  // Test URLs - let's try different possible routes
+  const refreshUrls = [
+    '/daily_prompts/refresh',
+    '<%= defined?(refresh_daily_prompts_path) ? refresh_daily_prompts_path : "/daily_prompts/refresh" %>'
+  ];
+  
+  const languageUrls = [
+    '/daily_prompts/update_language',
+    '<%= defined?(update_language_daily_prompts_path) ? update_language_daily_prompts_path : "/daily_prompts/update_language" %>'
+  ];
+  
+  console.log('Possible refresh URLs:', refreshUrls);
+  console.log('Possible language URLs:', languageUrls);
+  
+  $('#refresh-url').text(refreshUrls[0]);
+  $('#language-url').text(languageUrls[0]);
+  
+  // Refresh prompt
+  $('#refresh-prompt').click(function(e) {
+    e.preventDefault();
+    console.log('=== REFRESH BUTTON CLICKED ===');
+    
+    const button = $(this);
+    const originalText = button.html();
+    
+    button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Loading...');
+    
+    const refreshUrl = refreshUrls[0];
+    console.log('Making AJAX request to:', refreshUrl);
+    
+    $.ajax({
+      url: refreshUrl,
+      method: 'PATCH',
+      headers: {
+        'X-CSRF-Token': token
+      }
+    })
+    .done(function(data, textStatus, xhr) {
+      console.log('=== REFRESH SUCCESS ===');
+      console.log('Status:', xhr.status);
+      console.log('Response data:', data);
+      
+      if (data.success) {
+        $('#prompt-text').text(data.prompt_text);
+        console.log('Updated prompt text to:', data.prompt_text);
+        
+        // Show success message briefly
+        button.html('<i class="fas fa-check"></i> Updated!');
+        setTimeout(function() {
+          button.html(originalText);
+        }, 1000);
+      } else {
+        console.error('Refresh failed:', data.error);
+        alert('Error loading new prompt: ' + data.error);
+      }
+    })
+    .fail(function(xhr, status, error) {
+      console.log('=== REFRESH FAILED ===');
+      console.error('Status:', xhr.status);
+      console.error('Status text:', xhr.statusText);
+      console.error('Response text:', xhr.responseText);
+      console.error('Error:', error);
+      
+      alert('Error loading new prompt. Check console for details.');
+    })
+    .always(function() {
+      button.prop('disabled', false);
+      if (!button.html().includes('Updated!')) {
+        button.html(originalText);
+      }
+    });
+  });
+  
+  // Language toggle
+  $('.language-btn').click(function(e) {
+    e.preventDefault();
+    console.log('=== LANGUAGE BUTTON CLICKED ===');
+    
+    const language = $(this).data('language');
+    const button = $(this);
+    
+    console.log('Selected language:', language);
+    
+    // Disable all language buttons during request
+    $('.language-btn').prop('disabled', true);
+    
+    const languageUrl = '<%= update_language_daily_prompts_path %>';
+    console.log('Making AJAX request to:', languageUrl);
+    console.log('With data:', { language: language });
+    
+    $.ajax({
+      url: languageUrl,
+      method: 'PATCH',
+      data: { language: language },
+      headers: {
+        'X-CSRF-Token': token
+      }
+    })
+    .done(function(data, textStatus, xhr) {
+      console.log('=== LANGUAGE SUCCESS ===');
+      console.log('Status:', xhr.status);
+      console.log('Response data:', data);
+      
+      if (data.success) {
+        // Update active state
+        $('.language-btn').removeClass('active');
+        button.addClass('active');
+        
+        // Update the prompt text if provided
+        if (data.prompt_text) {
+          $('#prompt-text').text(data.prompt_text);
+          console.log('Updated prompt text to:', data.prompt_text);
+        }
+        
+        // Update debug info
+        if (data.language) {
+          $('#current-lang').text(data.language);
+        }
+        
+        console.log('Language updated successfully');
+      } else {
+        console.error('Language update failed:', data.error);
+        alert('Error changing language: ' + data.error);
+      }
+    })
+    .fail(function(xhr, status, error) {
+      console.log('=== LANGUAGE FAILED ===');
+      console.error('Status:', xhr.status);
+      console.error('Status text:', xhr.statusText);
+      console.error('Response text:', xhr.responseText);
+      console.error('Error:', error);
+      
+      alert('Error changing language. Check console for details.');
+    })
+    .always(function() {
+      $('.language-btn').prop('disabled', false);
+    });
+  });
+  
+  console.log('=== DAILY PROMPT DEBUG END ===');
+});
+</script>
+
+<style>
+.language-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.language-btn:disabled {
+  opacity: 0.6;
+}
+
+#debug-info {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+#debug-info code {
+  background-color: #f8f9fa;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+</style>

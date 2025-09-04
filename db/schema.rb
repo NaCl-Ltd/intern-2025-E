@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_09_02_063114) do
+ActiveRecord::Schema[7.0].define(version: 2025_09_03_043824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_02_063114) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
+  create_table "prompts", force: :cascade do |t|
+    t.json "translations"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_prompts_on_created_at"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -60,6 +67,18 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_02_063114) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "user_prompt_views", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "prompt_id", null: false
+    t.datetime "viewed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prompt_id"], name: "index_user_prompt_views_on_prompt_id"
+    t.index ["user_id", "prompt_id"], name: "index_user_prompt_views_on_user_id_and_prompt_id", unique: true
+    t.index ["user_id"], name: "index_user_prompt_views_on_user_id"
+    t.index ["viewed_at"], name: "index_user_prompt_views_on_viewed_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,10 +95,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_02_063114) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.text "introduction"
+    t.string "language_preference"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "microposts", "users"
+  add_foreign_key "user_prompt_views", "prompts"
+  add_foreign_key "user_prompt_views", "users"
 end

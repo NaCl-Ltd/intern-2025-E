@@ -34,3 +34,22 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+load File.join(Rails.root, 'db', 'seeds', 'prompts.rb')
+
+# Clear existing prompts first
+Prompt.destroy_all
+
+# Load prompts from JSON file
+prompts_file = Rails.root.join('db', 'data', 'prompts.json')
+if File.exist?(prompts_file)
+  json_data = JSON.parse(File.read(prompts_file))
+  
+  json_data['prompts'].each do |prompt_data|
+    Prompt.create!(translations: prompt_data['translations'])
+  end
+  
+  puts "Created #{json_data['prompts'].length} prompts from JSON file!"
+else
+  puts "JSON file not found at #{prompts_file}"
+end

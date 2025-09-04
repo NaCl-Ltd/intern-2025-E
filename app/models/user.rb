@@ -9,8 +9,12 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
+  has_many :user_prompt_views, dependent: :destroy
+  has_many :viewed_prompts, through: :user_prompt_views, source: :prompt
+
   before_save   :downcase_email
   before_create :create_activation_digest
+  
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -18,6 +22,7 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :language_preference, inclusion: { in: %w[en ja], allow_nil: true }
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -108,6 +113,35 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  # language preference
+  def preferred_language
+    language_preference || 'en' #default to English
+  end
+
+  def unseen_prompts
+    Prompt.where.not(id: viewed_prompt_ids)
+  end
+
+  def next_random_prompt
+    available = unseen_prompts
+
+    if available.empty?
+      # user has seen all prompts, reset their history 
+      user_prompt_views.destroy_all
+      available = Prompt.all
+    end
+
+    available.sample
+  end 
+
+  def mark_prompt_as_seen(prompt)
+    user_prompt_views.find_or_create_by(prompt: prompt)
+  end
+
+  def has_seen_prompt?(prompt)
+    viewed_prompt_ids.include?(prompt.id)
+  end
+
   private
 
     # メールアドレスをすべて小文字にする
@@ -123,7 +157,7 @@ class User < ApplicationRecord
 
     #pinned post methods
     def pinned_micropost
-      micropost.find_by(pinned: true)
+      microposts.find_by(pinned: true)
     end
 
     def has_pinned_post?
@@ -131,6 +165,6 @@ class User < ApplicationRecord
     end
 
     def microposts_ordered_with_pinned
-      micropost.ordered_with_pinned
-    end
+      microposts.ordered_with_pinned
+    end 
 end
