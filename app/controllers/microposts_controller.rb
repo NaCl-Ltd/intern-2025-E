@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy, :latest, :pin, :unpin]
-  before_action :correct_user,   only: [:destroy, :pin, :unpin]
+  before_action :logged_in_user, only: [:create, :destroy, :latest]
+  before_action :correct_user,   only: :destroy
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -28,6 +28,7 @@ class MicropostsController < ApplicationController
     end
   end
 
+
   def pin
     begin
       @micropost.pin!
@@ -44,6 +45,7 @@ class MicropostsController < ApplicationController
     flash[:success] = t('text.unpin_post')
     redirect_back(fallback_location: root_url)
   end 
+
 
   private
 
