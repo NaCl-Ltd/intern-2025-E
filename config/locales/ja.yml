@@ -12,6 +12,7 @@ ja:
     setting: "設定"
     logout: "ログアウト"
     login: "ログイン"
+    calendar: "カレンダー"
 
   help:
     title: "ヘルプ" 
@@ -117,3 +118,18 @@ ja:
     about: "このアプリについて"
     contact: "お問い合わせ"
     news: "ニュース"
+
+  calendar:
+    title: "カレンダー"
+    sunday: "日"
+    monday: "月"
+    tuesday: "火"
+    wednesday: "水"
+    thursday: "木"
+    friday: "金"
+    saturday: "土"
+    no_posts: "投稿はありません"
+
+  will_paginate:
+    previous_label: "前へ"
+    next_label: "次へ"

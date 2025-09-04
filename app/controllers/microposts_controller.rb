@@ -46,6 +46,10 @@ class MicropostsController < ApplicationController
     redirect_back(fallback_location: root_url)
   end 
 
+  def calendar
+  @posts_by_date = current_user.microposts.group_by { |post| post.created_at.to_date }
+  end
+
 
   private
 
