@@ -1,32 +1,32 @@
 <% provide(:title, "Edit user") %>
-<h1>Update your profile</h1>
+<h1><%= t('set.title') %></h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name %>
+      <%= f.label :name, t('set.name') %>
       <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :email %>
+      <%= f.label :email, t('set.email') %>
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password %>
+      <%= f.label :password, t('set.password') %>
       <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.label :password_confirmation, t('set.confirmation') %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-      <%= f.label :introduction, "introduction" %>
+      <%= f.label :introduction, t('set.introduction') %>
       <%= f.text_field :introduction, class: 'form-control' %>
 
-      <%= f.submit "Save changes", class: "btn btn-primary" %>
+      <%= f.submit t('set.save'), class: "btn btn-primary" %>
     <% end %>
 
     <div class="gravatar_edit">
       <%= gravatar_for @user %>
-      <a href="https://gravatar.com/emails" target="_blank">change</a>
+      <a href="https://gravatar.com/emails" target="_blank"><%= t('set.change') %></a>
     </div>
   </div>
 </div>
