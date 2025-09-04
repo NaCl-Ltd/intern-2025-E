@@ -1,7 +1,8 @@
 class DailyPrompt < ApplicationRecord
   def self.today_prompt
     today_hash = Date.today.to_s.hash 
-    ids_size = DailyPrompt.pluck(:id).count 
-    DailyPrompt.find(today_hash%ids_size)
+    ids = DailyPrompt.pluck(:id)
+    selected_id = ids[today_hash % ids.size]
+    DailyPrompt.find(selected_id)
   end
 end
