@@ -11,6 +11,7 @@ ja:
     profile: "プロフィール"
     setting: "設定"
     logout: "ログアウト"
+    login: "ログイン"
 
   help:
     title: "ヘルプ" 
@@ -19,6 +20,29 @@ ja:
     text3: "このサンプルアプリのヘルプを得るには" 
     text4: "Ruby on Railsチュートリアル本"
     text5: "をご覧ください。"
+
+  signup:
+    title: "サインアップ"
+    name: "名前"
+    email: "メールアドレス"
+    password: "パスワード"
+    confirmation: "確認"
+    submit: "アカウントを作成する"
+
+  login:
+    title: "ログイン"
+    email: "メールアドレス"
+    password: "パスワード"
+    remember_me: "このコンピュータにログイン状態を保存する"
+    submit: "ログイン"
+    forgot_password: "パスワードをお忘れですか？"
+    text1: "新しいユーザーですか？"
+    text2: "今すぐサインアップ！"
+
+  forgot:
+    title: "パスワードをお忘れですか？" 
+    email: "メールアドレス"
+    submit: "パスワードリセットのメールを送信"
 
   users:
     title: "ユーザー一覧"
@@ -57,8 +81,39 @@ ja:
 
   home:
     title: "サンプルアプリへようこそ！"
-    text: "このアプリは、"
+    text1: "このアプリは、"
     text2: "Ruby on Rails チュートリアル"
     text3: "のサンプルアプリです。"
     signup: "サインアップ"
 
+  about:
+    title: "このアプリについて"
+    text1: "Ruby on Rails チュートリアル"
+    text2: "では、"
+    text3: "書籍"
+    text4: "や"
+    text5: "スクリーンキャスト"
+    text6: "を用いて"
+    text7: "Ruby on Rails"
+    text8: "の基礎を学ぶことができます。"
+    text9: "これは、チュートリアルのサンプルアプリケーションです。"
+    text10: "また、このアプリケーションはネットワーク応用通信研究所が実施する
+            インターンシップの中でより良いアプリケーションになるよう改善が行われております。
+            この改善を実施したのは次のインターン生のみなさんです。"
+
+  contact:
+    title: "お問い合わせ"
+    text1: "Ruby on Rails チュートリアルに関するお問い合わせは"
+    text2: "Rails チュートリアル お問い合わせページ"
+    text3: "をご覧ください。"
+
+
+  footer:
+    text1: "この"
+    text2: "Ruby on Rails チュートリアル"
+    text3: "のサンプルアプリは、"
+    text4: "Michael Hartl"
+    text5: "によって作成されました。"
+    about: "このアプリについて"
+    contact: "お問い合わせ"
+    news: "ニュース"

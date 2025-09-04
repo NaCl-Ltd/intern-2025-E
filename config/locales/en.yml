@@ -42,6 +42,7 @@ en:
     profile: "Profile"
     setting: "Setting"
     logout: "Logout"
+    login: "Login"
 
   help:
     title: "Help"  
@@ -50,6 +51,30 @@ en:
     text3: "To get help with this sample app, please refer to the" 
     text4: "Ruby on Rails Tutorial book"
     text5: "."
+
+  signup:
+    title: "Sign up"
+    name: "Name"
+    email: "Email"
+    password: "Password"
+    confirmation: "Confirmation"
+    submit: "Create my account"
+
+
+  login:
+    title: "Log in"
+    email: "Email"
+    password: "Password"
+    remember_me: "Remember me on this computer"
+    submit: "Log in"
+    forgot_password: "Forgot password?"
+    text1: "New user?"
+    text2: "Sign up now!"
+
+  forgot:
+    title: "Forgot password"
+    email: "Email"
+    submit: "Send password reset email"
 
   users:
     title: "All users"
@@ -93,3 +118,32 @@ en:
     text2: "Ruby on Rails Tutorial"
     text3: "sample application."
     signup: "Sign up now!"
+
+  about:
+    title: "About this app"
+    text1: "The Ruby on Rails Tutorial"
+    text2: "is a."
+    text3: "book"
+    text4: "and"
+    text5: "screencast "
+    text6: "to teach web development with"
+    text7: "Ruby on Rails"
+    text8: "."
+    text9: "This is the sample application for the tutorial."
+    text10: "Also, this application is being improved to become a better application within the internships conducted by NaCl. This improvement was carried out by the following interns."
+
+  contact:
+    title: "Contact"
+    text1: "Contact the Ruby on Rails Tutorial about the sample app at the"
+    text2: "contact page"
+    text3: "."
+
+  footer:
+    text1: "The"
+    text2: "Ruby on Rails Tutorial"
+    text3: "sample app is created by"
+    text4: "Michael Hartl"
+    text5: "."
+    about: "About"
+    contact: "Contact"
+    news: "News"

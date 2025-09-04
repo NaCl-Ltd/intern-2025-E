@@ -36,7 +36,9 @@
           <li><%= link_to "日本語", change_locale_path(:ja), method: :post %></li>
           <li><%= link_to "English", change_locale_path(:en), method: :post %><li>
         <% else %>
-          <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to t('header.login'), login_path %></li>
+          <li><%= link_to "日本語", change_locale_path(:ja), method: :post %></li>
+          <li><%= link_to "English", change_locale_path(:en), method: :post %><li>
         <% end %>
       </ul>
     </nav>
