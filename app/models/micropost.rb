@@ -18,8 +18,39 @@ class Micropost < ApplicationRecord
                       size:         { less_than: 5.megabytes,
                                       message:   "should be less than 5MB" }
 
-  def can_be_pinned_by?(user)
-    user == self.user
+
+  # validation and methhod for pin feature
+  validate :only_one_pinned_per_user, if: :pinned?
+
+  # scope to find pinned posts
+  scope :pinned, -> { where(pinned: true) }
+  scope :not_pinned, -> { where(pinned: false) }
+
+  # method to pint his post (and unpin others)
+  def pin!
+    # first, unpin any existing pinned posts by this user
+    user.microposts.where(pinned: true).update_all(pinned: false)
+    # then pin this post
+    update!(pinned: true)
+  end
+
+  # method to unpin this post
+  def unpin!
+    update!(pinned: false)
+  end
+
+  # check if user can pin this post (must be the owner)
+  def can_be_pinned_by?(current_user)
+    user == current_user
+  end
+
+  private
+
+  # validation to ensure only one pinned post per user
+  def only_one_pinned_per_user
+    if user.microposts.where(pinned: true).where.not(id: id).exists?
+      errors.add(:pinned, "User can only have one pinned post")
+    end
   end
                                     
 end
