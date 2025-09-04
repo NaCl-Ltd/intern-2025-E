@@ -15,21 +15,43 @@
       </div>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
+
+      <h3><%= t('post.feed') %></h3>
+
+      <!-- show pinned post first if it exists -->
+      <% if @pinned_micropost %>
+        <div class="pinned-post-container mb-4">
+          <h5 class="text-muted mb-2">📌 <%= t('post.pinned_post') %></h5>
+          <ol class="microposts list-unstyled">
+            <%= render @pinned_micropost %>
+          </ol>
+        </div>
+        <hr>
+      <% end %>
+
+      <!-- show regular feed -->
+      <% if @feed_items.any? %>
+        <ol class="microposts list-unstyled">
+          <%= render @feed_items %>
+        </ol>
+        <%= will_paginate @feed_items %>
+      <% else %>
+        <p>No posts to show. Start following some users!</p>
+      <% end %>
+
     </div>
   </div>
 <% else %>
   <div class="center jumbotron">
-    <h1>Welcome to the Sample App</h1>
+    <h1><%= t('home.title') %></h1>
 
     <h2>
-      This is the home page for the
-      <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-      sample application.
+      <%= t('home.text1') %>
+      <a href="https://railstutorial.jp/"><%= t('home.text2') %></a>
+      <%= t('home.text3') %>
     </h2>
 
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to t('home.signup'), signup_path, class: "btn btn-lg btn-primary" %>
   </div>
 
   <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200px"),
