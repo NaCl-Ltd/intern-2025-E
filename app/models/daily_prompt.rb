@@ -1,0 +1,2 @@
+class DailyPrompt < ApplicationRecord
+end
