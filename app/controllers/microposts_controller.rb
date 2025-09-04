@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy, :latest, :pin, :unpin]
-  before_action :correct_user,   only: [:destroy, :pin, :unpin]
+  before_action :logged_in_user, only: [:create, :destroy, :latest]
+  before_action :correct_user,   only: :destroy
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -28,6 +28,7 @@ class MicropostsController < ApplicationController
     end
   end
 
+
   def pin
     begin
       @micropost.pin!
@@ -48,6 +49,7 @@ class MicropostsController < ApplicationController
   def calendar
   @posts_by_date = current_user.microposts.group_by { |post| post.created_at.to_date }
   end
+
 
   private
 
