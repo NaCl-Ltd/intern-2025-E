@@ -33,6 +33,7 @@
               </li>
             </ul>
           </li>
+          <li><%= link_to t('header.calendar'), calendar_path %></li>
           <li><%= link_to "日本語", change_locale_path(:ja), method: :post %></li>
           <li><%= link_to "English", change_locale_path(:en), method: :post %><li>
         <% else %>

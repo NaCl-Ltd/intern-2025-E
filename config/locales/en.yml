@@ -43,6 +43,7 @@ en:
     setting: "Setting"
     logout: "Logout"
     login: "Login"
+    calendar: "Calendar"
 
   help:
     title: "Help"  
@@ -147,3 +148,14 @@ en:
     about: "About"
     contact: "Contact"
     news: "News"
+
+  calendar:
+    title: "Calendar"
+    sunday: "Sun"
+    monday: "Mon"
+    tuesday: "Tue"
+    wednesday: "Wed"
+    thursday: "Thu"
+    friday: "Fri"
+    saturday: "Sat"
+    no_posts: "No posts"

@@ -30,4 +30,5 @@ Rails.application.routes.draw do
       patch :unpin     # POST /microposts/1/unpin
     end
   end
+  get 'calendar', to: 'microposts#calendar'
 end
