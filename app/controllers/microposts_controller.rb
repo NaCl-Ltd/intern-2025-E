@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy, :latest, :pin, :unpin]
-  before_action :correct_user,   only: [:destroy, :pin, :unpin]
+  before_action :logged_in_user, only: [:create, :destroy, :latest]
+  before_action :correct_user,   only: :destroy
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -27,23 +27,6 @@ class MicropostsController < ApplicationController
       redirect_to request.referrer, status: :see_other
     end
   end
-
-  def pin
-    begin
-      @micropost.pin!
-      flash[:success] = "Micropost pinned!"
-      redirect_back(fallback_location: root_url)
-    rescue ActiveRecord::RecordInvalid => e
-      flash[:danger] = "Error pinning micropost: #{e.message}"
-      redirect_back(fallback_location: root_url)
-    end
-  end
-
-  def unpin
-    @micropost.unpin!
-    flash[:success] = "Micropost unpinned!"
-    redirect_back(fallback_location: root_url)
-  end 
 
   private
 
