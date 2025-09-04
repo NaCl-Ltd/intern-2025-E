@@ -61,6 +61,7 @@ ja:
     feed: "マイクロポストフィード"
     post: "投稿"
     compose: "新しいマイクロポストを作成..."
+    daily_prompt: "今日のプロンプト"
 
   set:
     title: "プロフィールを更新"
