@@ -1,0 +1,135 @@
+
+ja:
+
+  header:
+    title: "サンプルアプリ"
+    home: "ホーム"
+    help: "ヘルプ"
+    latest: "最新"
+    users: "ユーザー一覧"
+    account: "アカウント"
+    profile: "プロフィール"
+    setting: "設定"
+    logout: "ログアウト"
+    login: "ログイン"
+    calendar: "カレンダー"
+
+  help:
+    title: "ヘルプ" 
+    text1: "Ruby on Rails チュートリアルのヘルプは"
+    text2: "Rails チュートリアル ヘルプページ"
+    text3: "このサンプルアプリのヘルプを得るには" 
+    text4: "Ruby on Railsチュートリアル本"
+    text5: "をご覧ください。"
+
+  signup:
+    title: "サインアップ"
+    name: "名前"
+    email: "メールアドレス"
+    password: "パスワード"
+    confirmation: "確認"
+    submit: "アカウントを作成する"
+
+  login:
+    title: "ログイン"
+    email: "メールアドレス"
+    password: "パスワード"
+    remember_me: "このコンピュータにログイン状態を保存する"
+    submit: "ログイン"
+    forgot_password: "パスワードをお忘れですか？"
+    text1: "新しいユーザーですか？"
+    text2: "今すぐサインアップ！"
+
+  forgot:
+    title: "パスワードをお忘れですか？" 
+    email: "メールアドレス"
+    submit: "パスワードリセットのメールを送信"
+
+  users:
+    title: "ユーザー一覧"
+    following : "フォロー中"
+    followers : "フォロワー"
+    introduction: "自己紹介"
+    microposts: "マイクロポスト"
+    profile: "プロフィールを見る"
+
+  post:
+    delete: "削除"
+    pin: "ピン留め"
+    unpin: "ピン留め解除"
+    pinned_post: "ピン留めされた投稿"
+    feed: "マイクロポストフィード"
+    post: "投稿"
+    compose: "新しいマイクロポストを作成..."
+
+  set:
+    title: "プロフィールを更新"
+    name: "名前"
+    email: "メールアドレス"
+    password: "パスワード"
+    confirmation: "確認"
+    introduction: "自己紹介"
+    save: "保存"
+    change: "変更"
+
+  text:
+    create_post: "マイクロポストを作成しました！"
+    update_post: "マイクロポストを更新しました"
+    delete_post: "マイクロポストを削除しました"
+    pin_post: "マイクロポストをピン留めしました"
+    unpin_post: "マイクロポストのピン留めを解除しました"
+    profile_updated: "プロフィールを更新しました"
+
+  home:
+    title: "サンプルアプリへようこそ！"
+    text1: "このアプリは、"
+    text2: "Ruby on Rails チュートリアル"
+    text3: "のサンプルアプリです。"
+    signup: "サインアップ"
+
+  about:
+    title: "このアプリについて"
+    text1: "Ruby on Rails チュートリアル"
+    text2: "では、"
+    text3: "書籍"
+    text4: "や"
+    text5: "スクリーンキャスト"
+    text6: "を用いて"
+    text7: "Ruby on Rails"
+    text8: "の基礎を学ぶことができます。"
+    text9: "これは、チュートリアルのサンプルアプリケーションです。"
+    text10: "また、このアプリケーションはネットワーク応用通信研究所が実施する
+            インターンシップの中でより良いアプリケーションになるよう改善が行われております。
+            この改善を実施したのは次のインターン生のみなさんです。"
+
+  contact:
+    title: "お問い合わせ"
+    text1: "Ruby on Rails チュートリアルに関するお問い合わせは"
+    text2: "Rails チュートリアル お問い合わせページ"
+    text3: "をご覧ください。"
+
+
+  footer:
+    text1: "この"
+    text2: "Ruby on Rails チュートリアル"
+    text3: "のサンプルアプリは、"
+    text4: "Michael Hartl"
+    text5: "によって作成されました。"
+    about: "このアプリについて"
+    contact: "お問い合わせ"
+    news: "ニュース"
+
+  calendar:
+    title: "カレンダー"
+    sunday: "日"
+    monday: "月"
+    tuesday: "火"
+    wednesday: "水"
+    thursday: "木"
+    friday: "金"
+    saturday: "土"
+    no_posts: "投稿はありません"
+
+  will_paginate:
+    previous_label: "前へ"
+    next_label: "次へ"

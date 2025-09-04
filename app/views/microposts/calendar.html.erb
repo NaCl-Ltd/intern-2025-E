@@ -1,0 +1,60 @@
+<!-- filepath: app/views/microposts/calendar.html.erb -->
+<style>
+  .calendar-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  .calendar-table th, .calendar-table td {
+    border: 1px solid #ddd;
+    width: 14%;
+    height: 70px;
+    vertical-align: top;
+    text-align: left;
+    padding: 6px;
+    background: #fafafa;
+  }
+  .calendar-table th { background: #f0f0f0; }
+  .calendar-day { cursor: pointer; transition: background 0.2s; }
+  .calendar-day:hover { background: #e0f7fa; }
+  .post-summary { font-size: 0.85em; color: #666; margin-top: 4px; }
+  #modal {
+    display: none; position: fixed; top: 30%; left: 50%; transform: translate(-50%,0);
+    background: #fff; border: 1px solid #aaa; padding: 18px 24px; z-index: 1000; box-shadow: 0 2px 8px #aaa;
+    min-width: 250px;
+  }
+  #modal button { margin-top: 12px; }
+</style>
+
+<h1><%= t('calendar.title') %></h1>
+<% @posts_by_date ||= {} %>
+
+<table class="calendar-table">
+  <tr>
+    <% [t('calendar.sunday'),t('calendar.monday'),t('calendar.tuesday'),t('calendar.wednesday'),t('calendar.thursday'),t('calendar.friday'),t('calendar.saturday')].each { |w| %><th><%= w %></th><% } %>
+  </tr>
+  <% today = Date.today; first = today.beginning_of_month; last = today.end_of_month; week = [] %>
+  <% (1..last.day).each do |d| %>
+    <% date = Date.new(today.year, today.month, d); week << date %>
+    <% if week.size == 1 %><tr><% date.wday.times { %><td></td><% } %><% end %>
+    <td class="calendar-day" onclick="showPost('<%= date %>')">
+      <strong><%= d %></strong>
+      <% if @posts_by_date[date] %>
+        <div class="post-summary">
+          <%= truncate(@posts_by_date[date].map(&:content).join(" / "), length: 24) %>
+        </div>
+      <% end %>
+    </td>
+    <% if date.wday == 6 %></tr><% week = [] %><% end %>
+  <% end %>
+  <% if week.any? %><% (7-week.last.wday-1).times { %><td></td><% } %></tr><% end %>
+</table>
+
+<div id="modal">
+  <span id="modalText"></span><br>
+  <button onclick="document.getElementById('modal').style.display='none'">閉じる</button>
+</div>
+<script>
+  var posts = <%= raw @posts_by_date.transform_values{|ps| ps.map(&:content)}.to_json %>;
+  function showPost(date){
+    var txt = posts[date] ? posts[date].map(function(c,i){return (i+1)+". "+c;}).join("<br>") : "投稿はありません";
+    modalText.innerHTML = "<b>"+date+"</b><br>"+txt;
+    document.getElementById('modal').style.display = "block";
+  }
+</script>

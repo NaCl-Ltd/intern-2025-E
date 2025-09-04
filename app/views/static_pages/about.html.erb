@@ -1,18 +1,16 @@
 <% provide(:title, "About") %>
-<h1>About</h1>
+<h1><%= t('about.title') %></h1>
 <p>
-  <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-  is a <a href="https://railstutorial.jp/#ebook">book</a> and
-  <a href="https://railstutorial.jp/screencast">screencast</a>
-  to teach web development with
-  <a href="https://rubyonrails.org/">Ruby on Rails</a>.
-  This is the sample application for the tutorial.
+  <a href="https://railstutorial.jp/"><%= t('about.text1') %></a>
+  <%= t('about.text2') %> <a href="https://railstutorial.jp/#ebook"><%= t('about.text3') %></a> <%= t('about.text4') %>
+  <a href="https://railstutorial.jp/screencast"><%= t('about.text5') %></a>
+  <%= t('about.text6') %>
+  <a href="https://rubyonrails.org/"><%= t('about.text7') %></a><%= t('about.text8') %>
+  <%= t('about.text9') %>
 </p>
 
 <p>
-  また、このアプリケーションは<%= Settings.about.internship.host %>が実施する
-  インターンシップの中でより良いアプリケーションになるよう改善が行われております。
-  この改善を実施したのは次のインターン生のみなさんです。
+  <%= t('about.text10') %>
   <ul>
     <li>foo</li>
     <li>bar</li>
