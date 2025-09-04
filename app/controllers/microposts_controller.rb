@@ -5,6 +5,11 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
+
+    if params[:micropost][:daily_prompt_id].present?
+      @micropost.daily_prompt_id = params[:micropost][:daily_prompt_id]
+    end 
+
     if @micropost.save
       flash[:success] = t('text.create_post')
       redirect_to root_url
@@ -32,7 +37,7 @@ class MicropostsController < ApplicationController
   def pin
     begin
       @micropost.pin!
-      flash[:success] = t('text.pin_post')
+      flash[:success] = "Micropost pinned!"
       redirect_back(fallback_location: root_url)
     rescue ActiveRecord::RecordInvalid => e
       flash[:danger] = "Error pinning micropost: #{e.message}"
@@ -42,9 +47,9 @@ class MicropostsController < ApplicationController
 
   def unpin
     @micropost.unpin!
-    flash[:success] = t('text.unpin_post')
+    flash[:success] = "Micropost unpinned!"
     redirect_back(fallback_location: root_url)
-  end 
+  end  
 
   def calendar
   @posts_by_date = current_user.microposts.group_by { |post| post.created_at.to_date }
@@ -54,7 +59,7 @@ class MicropostsController < ApplicationController
   private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :image)
+      params.require(:micropost).permit(:content, :image, :daily_prompt_id)
     end
 
     def correct_user

@@ -19,5 +19,17 @@ class Micropost < ApplicationRecord
                                       message:   "should be less than 5MB" }
   def can_be_pinned_by?(user)
     user == self.user
-  end                               
+  end        
+  
+  belongs_to :daily_prompt, optional: true
+
+  def is_daily_prompt_response?
+    daily_prompt_id.present?
+  end
+
+  def daily_prompt_question
+    daily_prompt&.send(I18n.locale.to_s) if daily_prompt
+  end
+
+  scope :daily_prompt_responses, -> { where.not(daily_prompt_id: nil) }
 end

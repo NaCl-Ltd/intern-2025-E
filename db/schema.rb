@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2025_09_04_042414) do
-
+ActiveRecord::Schema[7.0].define(version: 2025_09_04_182932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,11 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_04_042414) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-
-    t.boolean "pinned", default: false
-    t.index ["pinned"], name: "index_microposts_on_pinned"
-
-
+    t.boolean "pinned"
+    t.integer "daily_prompt_id"
+    t.index ["daily_prompt_id"], name: "index_microposts_on_daily_prompt_id"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
@@ -94,5 +90,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_04_042414) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "microposts", "daily_prompts"
   add_foreign_key "microposts", "users"
 end

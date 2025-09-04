@@ -90,9 +90,15 @@ en:
     pin: "Pin"
     unpin: "Unpin"
     pinned_post: "Pinned post"
-    feed: Micropost Feed
+    feed: "Micropost Feed"
     post: "Post"
-    compose : "Compose new micropost..."
+    compose: "Compose new micropost..."
+    daily_prompt: "Daily Prompt"
+    answer_daily_prompt: "Answer today's question..."
+    answer_prompt: "Answer Question"
+    daily_prompt_response: "Daily Prompt Response"
+    posted: "Posted"
+    ago: "ago"
 
   set:
     title: "Update your profile"
