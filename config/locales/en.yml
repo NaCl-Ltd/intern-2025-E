@@ -93,6 +93,7 @@ en:
     feed: Micropost Feed
     post: "Post"
     compose : "Compose new micropost..."
+    daily_prompt: "Dayly Prompt"
 
   set:
     title: "Update your profile"

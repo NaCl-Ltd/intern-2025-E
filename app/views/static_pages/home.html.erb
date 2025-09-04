@@ -11,7 +11,10 @@
         <%= render 'shared/micropost_form' %>
       </section>
       <div> 
-        <%= @daily_prompt.ja %>
+        <h4><%= t('post.daily_prompt') %></h4>
+      </div>
+      <div> 
+        <%= @daily_prompt[I18n.locale.to_s] %>
       </div>
     </aside>
     <div class="col-md-8">
