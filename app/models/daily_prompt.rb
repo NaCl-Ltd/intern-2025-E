@@ -8,6 +8,7 @@ class DailyPrompt < ApplicationRecord
     DailyPrompt.find(selected_id)
   end
 
+
   def responses
     microposts.where.not(daily_prompt_id: nil)
   end
@@ -16,3 +17,4 @@ class DailyPrompt < ApplicationRecord
     responses.count
   end 
 end
+
