@@ -1,5 +1,16 @@
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+  <!-- Show daily prompt question if this is a response -->
+  <% if micropost.is_daily_prompt_response? %>
+    <div class="daily_prompt-indicator mb-2">
+      <span class="badge badge-info">
+        📝 <%= t('post.daily_prompt_response') %>
+      </span>
+      <div class="daily-prompt-question">
+        <em><%= micropost.daily_prompt_question %></em>
+      </div>
+    </div>
+  <% end %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
     <%= micropost.content %>
@@ -13,7 +24,7 @@
       📌 <strong><%= t('post.pin') %></strong> •
     <% end %>
 
-    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    <%= t('post.posted') %> <%= time_ago_in_words(micropost.created_at) %> <%= t('post.ago') %>.
 
     <!-- show pin/unpin buttons only for post owner -->
     <% if micropost.can_be_pinned_by?(current_user) %>

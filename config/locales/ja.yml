@@ -1,4 +1,5 @@
 
+
 ja:
 
   header:
@@ -61,7 +62,12 @@ ja:
     feed: "マイクロポストフィード"
     post: "投稿"
     compose: "新しいマイクロポストを作成..."
-    daily_prompt: "今日のプロンプト"
+    daily_prompt: "日替わりお題"
+    answer_daily_prompt: "日替わりお題に答えてください..."
+    answer_prompt: "質問に答える"
+    daily_prompt_response: "日替わりお題への回答"
+    posted: "約"
+    ago: "前に投稿"
 
   set:
     title: "プロフィールを更新"
@@ -134,3 +140,47 @@ ja:
   will_paginate:
     previous_label: "前へ"
     next_label: "次へ"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "約1時間"
+        other: "約%{count}時間"
+      about_x_months:
+        one: "約1ヶ月"
+        other: "約%{count}ヶ月"
+      about_x_years:
+        one: "約1年"
+        other: "約%{count}年"
+      almost_x_years:
+        one: "1年弱"
+        other: "%{count}年弱"
+      half_a_minute: "30秒前"
+      less_than_x_minutes:
+        one: "1分未満"
+        other: "%{count}分未満"
+      less_than_x_seconds:
+        one: "1秒未満"
+        other: "%{count}秒未満"
+      over_x_years:
+        one: "1年以上"
+        other: "%{count}年以上"
+      x_days:
+        one: "1日"
+        other: "%{count}日"
+      x_minutes:
+        one: "1分"
+        other: "%{count}分"
+      x_months:
+        one: "1ヶ月"
+        other: "%{count}ヶ月"
+      x_seconds:
+        one: "1秒"
+        other: "%{count}秒"
+    prompts:
+      second: "秒"
+      minute: "分"
+      hour: "時"
+      day: "日"
+      month: "月"
+      year: "年"

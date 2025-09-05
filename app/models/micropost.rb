@@ -17,6 +17,20 @@ class Micropost < ApplicationRecord
                                       message: "must be a valid image format" },
                       size:         { less_than: 5.megabytes,
                                       message:   "should be less than 5MB" }
+       
+  
+  belongs_to :daily_prompt, optional: true
+
+  def is_daily_prompt_response?
+    daily_prompt_id.present?
+  end
+
+  def daily_prompt_question
+    daily_prompt&.send(I18n.locale.to_s) if daily_prompt
+  end
+
+  scope :daily_prompt_responses, -> { where.not(daily_prompt_id: nil) }
+
 
 
   # validation and methhod for pin feature
@@ -53,4 +67,5 @@ class Micropost < ApplicationRecord
     end
   end
                                     
+
 end
